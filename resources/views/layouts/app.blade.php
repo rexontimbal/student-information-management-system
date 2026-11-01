@@ -161,13 +161,15 @@
         <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content sims-modal">
-                    <div class="modal-body text-center p-4 pt-5">
-                        <div class="sims-modal-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
-                        <h5 class="fw-bold mb-2">Delete this record?</h5>
+                    <div class="modal-body p-4">
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <div class="sims-modal-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                            <h5 class="fw-bold mb-0">Delete this record?</h5>
+                        </div>
                         <p class="text-secondary mb-1" id="deleteConfirmLabel"></p>
                         <p class="small fw-semibold mb-0" style="color: var(--sims-danger);">This action cannot be undone.</p>
                     </div>
-                    <div class="modal-footer border-0 justify-content-center pb-4 pt-0">
+                    <div class="modal-footer border-0 justify-content-end pb-4 pt-0">
                         <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
                         <form id="deleteConfirmForm" method="POST" action="">
                             @csrf
