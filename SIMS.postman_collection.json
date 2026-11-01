@@ -1,0 +1,143 @@
+{
+    "info": {
+        "name": "SIMS - Student REST API",
+        "description": "REST API endpoints for the Student resource in the SIMS (Student Information Management System) Laravel project. Base URL defaults to the local dev server (php artisan serve). These endpoints are currently open (no auth) for development/testing.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://127.0.0.1:8000",
+            "type": "string"
+        },
+        {
+            "key": "student_id",
+            "value": "1",
+            "type": "string",
+            "description": "Set this to an existing student's id before running Get Single / Update / Delete."
+        }
+    ],
+    "item": [
+        {
+            "name": "List Students",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/students",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "students"]
+                },
+                "description": "GET /api/students — returns all students as JSON."
+            },
+            "response": []
+        },
+        {
+            "name": "Get Single Student",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/students/{{student_id}}",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "students", "{{student_id}}"]
+                },
+                "description": "GET /api/students/{id} — returns a single student, or a 404 JSON error if not found."
+            },
+            "response": []
+        },
+        {
+            "name": "Create Student",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"student_number\": \"2026-0002\",\n    \"first_name\": \"Maria\",\n    \"last_name\": \"Santos\",\n    \"email\": \"maria.santos@example.com\",\n    \"course\": \"BSIT\",\n    \"year_level\": \"1st Year\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/students",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "students"]
+                },
+                "description": "POST /api/students — creates a new student. Required fields: student_number (unique), first_name, last_name, email (unique, valid format), course, year_level. Returns 201 with the created record, or 422 with field errors."
+            },
+            "response": []
+        },
+        {
+            "name": "Update Student",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"student_number\": \"2026-0002\",\n    \"first_name\": \"Maria\",\n    \"last_name\": \"Santos-Reyes\",\n    \"email\": \"maria.santos@example.com\",\n    \"course\": \"BSIT\",\n    \"year_level\": \"2nd Year\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/students/{{student_id}}",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "students", "{{student_id}}"]
+                },
+                "description": "PUT /api/students/{id} — updates an existing student. Same validation rules as create, but uniqueness checks ignore this record's own current values."
+            },
+            "response": []
+        },
+        {
+            "name": "Delete Student",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/students/{{student_id}}",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "students", "{{student_id}}"]
+                },
+                "description": "DELETE /api/students/{id} — deletes a student and returns a JSON success message."
+            },
+            "response": []
+        }
+    ]
+}
