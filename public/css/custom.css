@@ -738,6 +738,87 @@ body {
     text-decoration: underline;
 }
 
+/* ---------- Danger button (delete) ---------- */
+.btn-danger {
+    background-color: var(--sims-danger);
+    border-color: var(--sims-danger);
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    background-color: #b91c1c;
+    border-color: #b91c1c;
+}
+
+/* ---------- Delete confirmation modal ---------- */
+.sims-modal {
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--sims-shadow-lg);
+}
+
+.sims-modal-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--sims-danger-bg);
+    color: var(--sims-danger);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+}
+
+/* ---------- Toast notifications ---------- */
+.sims-toast-container {
+    z-index: 1090;
+}
+
+.sims-toast {
+    border: none;
+    border-radius: var(--sims-radius);
+    box-shadow: var(--sims-shadow-lg);
+    overflow: hidden;
+    min-width: 320px;
+    border-left: 4px solid transparent;
+}
+
+.sims-toast .toast-body {
+    padding: 0.9rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.sims-toast .toast-body i {
+    font-size: 1.1rem;
+    margin-top: 0.05rem;
+}
+
+.sims-toast-success {
+    background: var(--sims-success-bg);
+    border-left-color: var(--sims-success);
+    color: #166534;
+}
+
+.sims-toast-success i {
+    color: var(--sims-success);
+}
+
+.sims-toast-danger {
+    background: var(--sims-danger-bg);
+    border-left-color: var(--sims-danger);
+    color: #991b1b;
+}
+
+.sims-toast-danger i {
+    color: var(--sims-danger);
+}
+
+.sims-toast .btn-close {
+    font-size: 0.7rem;
+}
+
 /* ---------- Mobile responsiveness ---------- */
 @media (max-width: 991.98px) {
     .sims-sidebar {

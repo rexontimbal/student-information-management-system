@@ -46,14 +46,12 @@
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                         @if (auth()->user()->isAdmin())
-                                            <form action="{{ route('students.destroy', $student) }}" method="POST"
-                                                  onsubmit="return confirm('Delete {{ $student->first_name }} {{ $student->last_name }}? This cannot be undone.');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="sims-icon-btn danger" title="Delete">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </form>
+                                            <button type="button" class="sims-icon-btn danger" title="Delete"
+                                                    data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
+                                                    data-delete-url="{{ route('students.destroy', $student) }}"
+                                                    data-delete-label="Delete student: {{ $student->first_name }} {{ $student->last_name }} ({{ $student->student_number }})?">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
                                         @endif
                                     </div>
                                 </td>

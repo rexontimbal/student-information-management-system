@@ -113,25 +113,70 @@
                 @endisset
 
                 <div class="sims-page-content">
-                    @if (session('success'))
-                        <div class="sims-alert sims-alert-success">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <div>{{ session('success') }}</div>
-                        </div>
-                    @endif
-
-                    @if (session('error'))
-                        <div class="sims-alert sims-alert-danger">
-                            <i class="bi bi-exclamation-triangle-fill"></i>
-                            <div>{{ session('error') }}</div>
-                        </div>
-                    @endif
-
                     @isset($slot)
                         {{ $slot }}
                     @else
                         @yield('content')
                     @endisset
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast notifications -->
+        <div class="toast-container sims-toast-container position-fixed top-0 end-0 p-3">
+            @if (session('success'))
+                <div class="toast sims-toast sims-toast-success" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="4000">
+                    <div class="toast-body d-flex align-items-start gap-2">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <div class="flex-grow-1">{{ session('success') }}</div>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="toast sims-toast sims-toast-danger" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="4000">
+                    <div class="toast-body d-flex align-items-start gap-2">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <div class="flex-grow-1">{{ session('error') }}</div>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                @foreach ($errors->all() as $message)
+                    <div class="toast sims-toast sims-toast-danger" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="4000">
+                        <div class="toast-body d-flex align-items-start gap-2">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                            <div class="flex-grow-1">{{ $message }}</div>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+
+        <!-- Reusable delete confirmation modal -->
+        <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content sims-modal">
+                    <div class="modal-body text-center p-4 pt-5">
+                        <div class="sims-modal-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                        <h5 class="fw-bold mb-2">Delete this record?</h5>
+                        <p class="text-secondary mb-1" id="deleteConfirmLabel"></p>
+                        <p class="small fw-semibold mb-0" style="color: var(--sims-danger);">This action cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer border-0 justify-content-center pb-4 pt-0">
+                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
+                        <form id="deleteConfirmForm" method="POST" action="">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash me-1"></i> Delete
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -156,6 +201,23 @@
                 });
 
                 backdrop?.addEventListener('click', closeSidebar);
+            })();
+
+            // Show all flash/validation toasts on page load, auto-dismissing.
+            (function () {
+                document.querySelectorAll('.sims-toast-container .toast').forEach(function (el) {
+                    new bootstrap.Toast(el).show();
+                });
+            })();
+
+            // Populate the shared delete confirmation modal from the triggering button's data attributes.
+            (function () {
+                const deleteModal = document.getElementById('deleteConfirmModal');
+                deleteModal?.addEventListener('show.bs.modal', function (event) {
+                    const button = event.relatedTarget;
+                    document.getElementById('deleteConfirmForm').action = button.getAttribute('data-delete-url');
+                    document.getElementById('deleteConfirmLabel').textContent = button.getAttribute('data-delete-label');
+                });
             })();
         </script>
 

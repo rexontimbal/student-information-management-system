@@ -250,6 +250,22 @@ Student Information Management System (SIMS) — Laravel + MySQL, Breeze auth, A
 
 ---
 
+---
+
+## Step 14 — Themed Confirmations, Toasts, and Notifications ✅ DONE
+
+**Why this step exists:** delete actions across Student/Subject/Enrollment currently use the browser's native `confirm()` dialog (plain OS-styled popup) and flash messages use a basic inline banner — both look inconsistent with the premium design system. Before going live/deploying, polish these to match.
+
+**Result:**
+- One shared `#deleteConfirmModal` added to `layouts/app.blade.php` — reused by all three modules via `data-delete-url`/`data-delete-label` attributes on each row's Delete button (no duplicated modal markup across Students/Subjects/Enrollments).
+- Toast notifications added site-wide in `layouts/app.blade.php`, reading `session('success')`/`session('error')`/`$errors->all()` — green left-accent for success, red for errors, auto-dismiss after 4s + manual close, stacking top-right. One toast per validation error.
+- `public/css/custom.css` extended: `.btn-danger` override, `.sims-modal*`, `.sims-toast*` styles.
+- No backend/controller/route logic touched — visual layer only.
+- **Verified independently in the browser**: clicked Delete on a student row → confirmed the themed modal shows the exact record identifier ("Delete student: Rexon Timbal (2026-0001)?") and the cannot-undo warning → clicked Cancel (no deletion made). Submitted an empty Add Student form → confirmed 6 stacked red error toasts appear top-right alongside the existing per-field inline errors. Screenshots captured.
+- **Re-ran the full test suite independently**: 36/36 still passed, confirming the visual-only change introduced no regressions.
+
+---
+
 **Still needed before final submission (not code — documents to write, not prompts to run):**
 - `AI_PORTFOLIO.pdf` — build from this log's prompts/results (AI platform used, prompt history: initial → refined → debugging examples, prompt iterations)
 - `AGENT_DESIGN.pdf` — describe the actual workflow used: a planning/review Claude session (this chat) drafting and verifying each step, executed by a second Claude Code session in VS Code — a simpler 2-role split than the handbook's example 5-agent architecture, worth explaining *why* that was sufficient for this project's scope
