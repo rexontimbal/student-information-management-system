@@ -113,6 +113,20 @@
                 @endisset
 
                 <div class="sims-page-content">
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
                     @isset($slot)
                         {{ $slot }}
                     @else
@@ -120,32 +134,6 @@
                     @endisset
                 </div>
             </div>
-        </div>
-
-        <!-- Toast notifications -->
-        <div class="toast-container sims-toast-container position-fixed top-0 end-0 p-3">
-            @if (session('success'))
-                <div class="toast sims-toast sims-toast-success" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="4000">
-                    <div class="toast-body d-flex align-items-start gap-2">
-                        <i class="bi bi-check-circle-fill"></i>
-                        <div class="flex-grow-1">{{ session('success') }}</div>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div class="toast sims-toast sims-toast-danger" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="4000">
-                    <div class="toast-body d-flex align-items-start gap-2">
-                        <i class="bi bi-exclamation-triangle-fill"></i>
-                        <div class="flex-grow-1">{{ session('error') }}</div>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                </div>
-            @endif
-            {{-- Per-field validation errors are intentionally NOT toasted here —
-                 they already show inline under each form field, and duplicating
-                 them as toasts was redundant. --}}
         </div>
 
         <!-- Reusable delete confirmation modal -->
@@ -194,13 +182,6 @@
                 });
 
                 backdrop?.addEventListener('click', closeSidebar);
-            })();
-
-            // Show all flash/validation toasts on page load, auto-dismissing.
-            (function () {
-                document.querySelectorAll('.sims-toast-container .toast').forEach(function (el) {
-                    new bootstrap.Toast(el).show();
-                });
             })();
 
             // Populate the shared delete confirmation modal from the triggering button's data attributes.
