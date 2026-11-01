@@ -1,0 +1,41 @@
+Note:
+Version control is not required for project completion but is highly recommended. Students who demonstrate professional version control practices through GitHub, GitLab, Bitbucket, or similar platforms may earn up to 5 bonus points. Commit history should reflect actual development progress rather than a single end-of-project upload.
+
+Bonus E. Professional Development Practices (+5)
+
+Criteria	Points
+Repository Created and Maintained	1
+Consistent Commit Activity	1
+Meaningful Commit Messages	1
+Evidence of Incremental Development	1
+Git & AI Reflection	1
+Total Bonus	+5
+
+Performance Levels (Rubric)
+
+Excellent (+5)
+
+Repository demonstrates:
+15+ commits
+Good commit messages
+Incremental work
+Meaningful progression
+Professional repository
+
+Good (+4)
+10-15 commits
+Mostly meaningful messages
+Evidence of progression
+
+Fair (+2 to +3)
+5-10 commits
+Some vague messages
+Limited progression
+
+Minimal (+1)
+Repository exists
+Very little Git activity
+
+No Bonus (0)
+No repository
+No Git history
