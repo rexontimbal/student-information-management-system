@@ -143,18 +143,9 @@
                     </div>
                 </div>
             @endif
-
-            @if ($errors->any())
-                @foreach ($errors->all() as $message)
-                    <div class="toast sims-toast sims-toast-danger" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="4000">
-                        <div class="toast-body d-flex align-items-start gap-2">
-                            <i class="bi bi-exclamation-triangle-fill"></i>
-                            <div class="flex-grow-1">{{ $message }}</div>
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
+            {{-- Per-field validation errors are intentionally NOT toasted here —
+                 they already show inline under each form field, and duplicating
+                 them as toasts was redundant. --}}
         </div>
 
         <!-- Reusable delete confirmation modal -->
