@@ -279,3 +279,12 @@ Student Information Management System (SIMS) — Laravel + MySQL, Breeze auth, A
 - Token optimization strategies used: _TBD (task decomposition — one module per prompt, per this log)_
 - How AI outputs were verified: _independently re-checked by a second Claude session reading files/routes/DB directly after every step, instead of trusting the VS Code Claude Code report alone_
 - Prompts rejected/revised: _TBD_
+
+---
+
+## Post-Step-14 refinements (user feedback, direct edits — no VS Code Claude Code prompt needed)
+
+- Minimized the delete confirmation modal: smaller icon, placed inline next to the heading instead of large and centered.
+- Reverted flash messages (success/error) from the floating toast style back to standard inline Bootstrap `alert-success`/`alert-danger` banners at the top of the page — per direct feedback that the toast was an unnecessary departure from familiar UX. The delete confirmation modal was kept (that one was well-received).
+- Removed the redundant per-field-validation-error toasts entirely (they duplicated the inline `@error()` messages already shown under each input).
+- All verified independently in the browser and against the 36-test suite after each change (still 36/36 passing).
