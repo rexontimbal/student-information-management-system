@@ -12,6 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Render (and most PaaS hosts) terminate HTTPS at a reverse proxy and
+        // forward plain HTTP internally, so trust the proxy headers to keep
+        // url()/secure cookies/CSRF working correctly in production.
+        $middleware->trustProxies(at: '*');
+
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
         ]);
